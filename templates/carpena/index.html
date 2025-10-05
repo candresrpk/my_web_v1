@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block title %}Home - Andrés Peña{% endblock %}
+{% block content %}
+
+<!-- ===== Hero Section ===== -->
+<section class="hero text-center text-white py-5" style="background: linear-gradient(135deg, #2f6d52, #3a8363); border-radius: 1rem;">
+  <div class="container">
+    <h1 class="fw-bold mb-3 display-4">Hola, soy <span class="text-light">Andrés Peña</span> 👋</h1>
+    <p class="lead mb-4 mx-auto" style="max-width: 800px;">
+      Desarrollador apasionado por la programación, la tecnología y el aprendizaje constante.  
+      Me encanta crear soluciones con <strong>Python</strong>, <strong>Node.js</strong> y <strong>React</strong>,  
+      desplegarlas en <strong>AWS</strong> y optimizarlas con <strong>SQL</strong>, <strong>Excel</strong> y <strong>Linux</strong>.
+    </p>
+
+    <!-- Skills Icons -->
+    <div class="d-flex justify-content-center flex-wrap gap-4 mt-5">
+      {% for skill in skills %}
+        <div class="bg-white bg-opacity-10 text-white rounded-4 p-4 shadow-sm text-center icon-box transition" 
+             style="backdrop-filter: blur(5px); cursor: default; transition: transform 0.3s;">
+          <i class="{{ skill.icon }} fa-2x {{ skill.color }}"></i>
+          <p class="mt-2 mb-0 small fw-semibold">{{ skill.name }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===== Sobre mí ===== -->
+<section class="py-5 bg-white text-dark rounded-4">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4 text-success">Sobre mí</h2>
+    <p class="lead mx-auto" style="max-width: 800px; line-height: 1.8;">
+      Soy un desarrollador que disfruta resolver problemas con código.  
+      Me apasiona crear herramientas que aporten valor real a las personas.  
+      Me motiva la curiosidad, el aprendizaje continuo y el trabajo en equipo.
+    </p>
+  </div>
+</section>
+
+{% comment %} <!-- ===== Proyectos ===== -->
+<section class="py-5 bg-light text-dark">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4 text-success">Mis Proyectos</h2>
+
+    <div id="projectsCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        {% for project in projects %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="d-flex justify-content-center">
+              <div class="card shadow-lg rounded-4 border-0" style="width: 22rem;">
+                {% if project.image %}
+                  <img src="{{ project.image.url }}" class="card-img-top rounded-top-4" alt="{{ project.title }}">
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">{{ project.title }}</h5>
+                  <p class="card-text">{{ project.description|truncatewords:25 }}</p>
+                  {% if project.link %}
+                    <a href="{{ project.link }}" target="_blank" class="btn btn-success btn-sm fw-semibold">Ver Proyecto</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+<!-- ===== Frase motivadora ===== -->
+<section class="py-5 text-center text-white" style="background: linear-gradient(135deg, #2f6d52, #3a8363); border-radius: 1rem;"  >
+  <div class="container">
+    <blockquote class="blockquote fs-3 fw-semibold">
+      “El código es como el humor: cuando tienes que explicarlo, ya no es tan bueno.”
+    </blockquote>
+    <footer class="blockquote-footer text-light mt-2">Cory House</footer>
+  </div>
+</section>
+
+{% comment %} <!-- ===== Blog / Preguntas ===== -->
+<section class="py-5 bg-light text-dark">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-4 text-success">Preguntas y Reflexiones del Blog</h2>
+
+    <div id="blogCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for post in posts %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="d-flex justify-content-center">
+              <div class="card shadow-lg rounded-4 border-0" style="width: 22rem;">
+                {% if post.image %}
+                  <img src="{{ post.image.url }}" class="card-img-top rounded-top-4" alt="{{ post.title }}">
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">{{ post.title }}</h5>
+                  <p class="card-text">{{ post.excerpt|truncatewords:25 }}</p>
+                  <a href="{% url 'blog:detail' post.slug %}" class="btn btn-success btn-sm fw-semibold">Leer más</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+  </div>
+</section> {% endcomment %}
+
+{% endblock %}
