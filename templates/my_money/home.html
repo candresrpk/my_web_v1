@@ -13,65 +13,13 @@
         </p>
 
         <div class="mt-5 gap-3">
-            <button id="openFormBtn" class="btn btn-light btn-lg px-5 py-2 fw-semibold text-success rounded-pill shadow-sm transition">
+            <a href ="{% url 'my_money:dashboard' %}" class="btn btn-light btn-lg px-5 py-2 fw-semibold text-success rounded-pill shadow-sm transition">
                 Ir a My Money
-            </button>
+            </a>
             <a href="#" class="btn btn-outline-light btn-lg rounded-pill px-4">
                 Saber más
             </a>
         </div>
     </div>
 </section>
-
-<!-- 🔹 Formulario flotante -->
-<div id="floatingForm" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
-     style="background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); visibility: hidden; opacity: 0; transition: opacity 0.3s ease, visibility 0.3s ease; z-index: 1050;">
-    <div class="bg-white p-5 rounded-4 shadow-lg text-center" style="max-width: 400px; width: 90%;">
-        <h3 class="fw-bold text-success mb-3">💰 Bienvenido a My Money</h3>
-        <p class="text-muted mb-4" style="font-size: 0.95rem; line-height: 1.5;">
-            Para continuar, por favor ingresa el nombre que tendrá tu cartera  
-            para administrar tus finanzas personales.
-        </p>
-        <form id="nameForm">
-            <div class="form-floating mb-4">
-                <input type="text" class="form-control rounded-3 border-success shadow-sm" id="nombre" placeholder="Tu nombre" required>
-                <label for="nombre">Nombre de tu cartera</label>
-            </div>
-            <button type="submit" class="btn btn-success w-100 py-2 fw-semibold rounded-pill shadow-sm">Continuar</button>
-        </form>
-        <button id="closeFormBtn" class="btn btn-link text-muted mt-3 text-decoration-none">Cancelar</button>
-    </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const floatingForm = document.getElementById('floatingForm');
-    const openBtn = document.getElementById('openFormBtn');
-    const closeBtn = document.getElementById('closeFormBtn');
-    const form = document.getElementById('nameForm');
-
-    // Mostrar el formulario
-    openBtn.addEventListener('click', () => {
-        floatingForm.style.visibility = 'visible';
-        floatingForm.style.opacity = '1';
-    });
-
-    // Cerrar el formulario
-    closeBtn.addEventListener('click', () => {
-        floatingForm.style.opacity = '0';
-        floatingForm.style.visibility = 'hidden';
-    });
-
-    // Enviar el formulario
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const nombre = document.getElementById('nombre').value.trim();
-        if (nombre) {
-            alert(`✨ Tu cartera "${nombre}" ha sido creada. ¡Bienvenido a My Money! 💸`);
-            floatingForm.style.opacity = '0';
-            floatingForm.style.visibility = 'hidden';
-        }
-    });
-});
-</script>
 {% endblock %}

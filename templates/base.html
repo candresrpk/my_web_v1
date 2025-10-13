@@ -38,10 +38,16 @@
 
     <body>
         <header>
-            {% include "./includes/navbar.html" %}
+            {% if request.resolver_match.app_name != "my_money" %}
+                {% include "./includes/navbar.html" %}
+            {% endif %}
         </header>
         <main class="container my-5 min-vh-100">
 
+
+            {% if request.resolver_match.app_name == "my_money" %}
+                {% include "./my_money/includes/sidebar.html" %}
+            {% endif %}
 
 
             {% block content %}

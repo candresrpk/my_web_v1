@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}My Money Dash{% endblock %}
+
+{% block content %}
+
+<div class="main-content d-flex justify-content-center align-items-center">
+  <div class="card shadow-lg border-0" style="max-width: 600px; background-color: #e6f4ea; border-radius: 20px;">
+    <div class="card-body text-center p-5">
+      <h2 class="mb-4" style="color: #2e7d32;">Bienvenido a tu Dashboard</h2>
+      <p class="mb-4" style="color: #33691e; font-size: 1.1rem;">
+        Aquí podrás manejar tus finanzas personales.  
+        Primero debes crear una <strong>cartera</strong> y entonces podrás iniciar a gestionar tu dinero.
+      </p>
+      <button type="button" class="btn btn-success px-4 py-2" style="border-radius: 10px;" data-bs-toggle="modal" data-bs-target="#crearCarteraModal">
+        💼 Crea tu cartera
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal flotante -->
+<div class="modal fade" id="crearCarteraModal" tabindex="-1" aria-labelledby="crearCarteraModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow-lg" style="border-radius: 20px;">
+      <div class="modal-header" style="background-color: #e6f4ea; border-bottom: none; border-radius: 20px 20px 0 0;">
+        <h5 class="modal-title" id="crearCarteraModalLabel" style="color: #2e7d32;">Crear nueva cartera</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <form method="post" action="{% url 'my_money:create_cartera' %}">
+        {% csrf_token %}
+        <div class="modal-body text-center" style="color: #33691e;">
+          <p class="mb-3">Ingresa el nombre de tu cartera para comenzar a manejar tus finanzas.</p>
+          <input type="text" name="nombre" class="form-control text-center" placeholder="Nombre de la cartera" required style="border-radius: 10px;">
+        </div>
+        <div class="modal-footer justify-content-center border-0 pb-4">
+          <button type="submit" class="btn btn-success px-4" style="border-radius: 10px;">Guardar cartera</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
